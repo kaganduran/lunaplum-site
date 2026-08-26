@@ -1,0 +1,11 @@
+# Kagan's build brief. Machine paths and pre-launch notes, not for a public repo.
+BRIEF.md
+
+# Working notes. These say out loud that the policy is model-drafted and that
+# analytics and App Check are not wired up yet. True, useful, and not something
+# to publish next to a live privacy policy.
+TODO.md
+APP-PRIVACY-LABELS.md
+
+.DS_Store
+.playwright-mcp/

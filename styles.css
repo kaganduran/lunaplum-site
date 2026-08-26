@@ -1,0 +1,513 @@
+/* ==========================================================================
+   Lunaplum
+   Palette is taken from the fruit: a dark blue-purple skin, the pale waxy
+   bloom that sits on it, and the amber flesh near the stone. Marketing pages
+   are the skin side. Documents are the cut side.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('/assets/fonts/bodoni-moda-latin.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('/assets/fonts/archivo-latin.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --skin:     #2A1B33;
+  --skin-up:  #3A2745;
+  --skin-dn:  #1E1226;
+  --bloom:    #E8E4EE;
+  --bloom-dn: #D9D3E2;
+  --ink:      #241A2C;
+  --muted:    #6E6379;
+  --amber:    #C08A2E;
+  --plum:     #6B2F52;
+
+  --display: 'Bodoni Moda', 'Didot', 'Bodoni MT', Georgia, serif;
+  --text: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  --measure: 34rem;
+  --gutter: clamp(1.5rem, 6vw, 5rem);
+  --rule: 1px;
+
+  color-scheme: light dark;
+  font-synthesis: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Page themes ------------------------------------------------------------ */
+
+.bloom {
+  --ground: var(--bloom);
+  --ground-up: var(--bloom-dn);
+  --body: var(--ink);
+  --quiet: var(--muted);
+  --line: rgba(36, 26, 44, 0.16);
+  --link: var(--plum);
+}
+
+.skin {
+  --ground: var(--skin);
+  --ground-up: var(--skin-up);
+  --body: var(--bloom);
+  --quiet: #A497B0;
+  --line: rgba(232, 228, 238, 0.18);
+  --link: var(--amber);
+}
+
+@media (prefers-color-scheme: dark) {
+  .bloom {
+    --ground: var(--skin-dn);
+    --ground-up: var(--skin);
+    --body: var(--bloom);
+    --quiet: #A497B0;
+    --line: rgba(232, 228, 238, 0.16);
+    --link: var(--amber);
+  }
+}
+
+/* Base ------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--body);
+  font-family: var(--text);
+  font-size: 1rem;
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--link); text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ground);
+  color: var(--body);
+  padding: 0.75rem 1rem;
+  z-index: 10;
+}
+.skip:focus { left: var(--gutter); }
+
+.wrap {
+  width: 100%;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* Type roles ------------------------------------------------------------- */
+
+.eyebrow {
+  font-family: var(--text);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--quiet);
+  margin: 0;
+}
+
+.display {
+  font-family: var(--display);
+  font-variation-settings: 'opsz' 96;
+  font-weight: 400;
+  letter-spacing: -0.018em;
+  line-height: 1.02;
+  margin: 0;
+}
+
+.lede {
+  font-size: clamp(1.0625rem, 0.98rem + 0.42vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 30rem;
+  margin: 0;
+}
+
+.prose { max-width: var(--measure); }
+.prose p { margin: 0 0 1.1em; }
+.prose p:last-child { margin-bottom: 0; }
+
+.quiet { color: var(--quiet); }
+
+.hr {
+  border: 0;
+  border-top: var(--rule) solid var(--line);
+  margin: 0;
+}
+
+/* A rule on a .wrap element draws across its padding, which overhangs the text
+   by a whole gutter. These draw it inset instead, so every rule on the site
+   lines up with the content it separates. */
+
+.ruled, .ruled-under { position: relative; }
+
+.ruled::before, .ruled-under::after {
+  content: '';
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  border-top: var(--rule) solid var(--line);
+}
+.ruled::before { top: 0; }
+.ruled-under::after { bottom: 0; }
+
+/* ==========================================================================
+   Studio page
+   ========================================================================== */
+
+.studio { min-height: 100svh; display: flex; flex-direction: column; }
+
+.studio-main { padding-block: clamp(6rem, 22vh, 12rem) clamp(4rem, 10vh, 7rem); }
+
+.studio-name {
+  font-size: clamp(3.25rem, 1.6rem + 8.2vw, 6.5rem);
+  margin-bottom: 2.25rem;
+}
+
+.studio-mark {
+  display: block;
+  width: 2.75rem;
+  height: var(--rule);
+  background: var(--amber);
+  margin-bottom: 2.5rem;
+}
+
+.roster { margin-top: clamp(4rem, 12vh, 7rem); }
+
+.roster-head { margin-bottom: 1.75rem; }
+
+.entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.25rem 2rem;
+  align-items: baseline;
+  padding-block: 1.5rem;
+  border-top: var(--rule) solid var(--line);
+}
+.entry:last-of-type { border-bottom: var(--rule) solid var(--line); }
+
+.entry-name {
+  font-family: var(--display);
+  font-variation-settings: 'opsz' 40;
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+}
+.entry-name a { text-decoration-color: var(--line); }
+
+.entry-status {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--quiet);
+  white-space: nowrap;
+}
+
+.entry-note {
+  grid-column: 1 / -1;
+  margin: 0.35rem 0 0;
+  color: var(--quiet);
+  max-width: 30rem;
+}
+
+.foot {
+  margin-top: auto;
+  padding-block: 2rem 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  color: var(--quiet);
+}
+.foot p { margin: 0; }
+.foot a { color: inherit; }
+
+/* ==========================================================================
+   Aurava
+   ========================================================================== */
+
+.masthead {
+  padding-block: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+.masthead a { color: var(--quiet); text-decoration-color: var(--line); }
+.masthead a:hover { color: var(--body); }
+
+.hero { padding-block: clamp(3.5rem, 12vh, 8rem) 0; }
+
+.hero-title {
+  font-size: clamp(3rem, 1.1rem + 9.4vw, 7rem);
+  max-width: 11ch;
+  margin-bottom: 2rem;
+}
+
+.hero-sub { margin-bottom: 2.5rem; }
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--quiet);
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: 0.6rem; }
+.hero-meta span + span::before {
+  content: '';
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+
+/* The signature: one line, written again, the way a practice is kept. */
+
+.practice { padding-block: clamp(4rem, 12vh, 7rem) clamp(3rem, 8vh, 4.5rem); }
+
+.practice-label { margin-bottom: 1.5rem; }
+
+.practice-lines { margin: 0; padding: 0; list-style: none; }
+
+.practice-lines li {
+  font-family: var(--display);
+  font-variation-settings: 'opsz' 32;
+  font-size: clamp(1.125rem, 0.85rem + 1.35vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  opacity: var(--o);
+  animation: settle 900ms ease-out both;
+  animation-delay: var(--d);
+}
+
+.practice-lines li:nth-child(1) { --o: 1;    --d: 120ms; }
+.practice-lines li:nth-child(2) { --o: .82;  --d: 260ms; }
+.practice-lines li:nth-child(3) { --o: .66;  --d: 380ms; }
+.practice-lines li:nth-child(4) { --o: .52;  --d: 490ms; }
+.practice-lines li:nth-child(5) { --o: .40;  --d: 590ms; }
+.practice-lines li:nth-child(6) { --o: .30;  --d: 680ms; }
+.practice-lines li:nth-child(7) { --o: .22;  --d: 760ms; }
+.practice-lines li:nth-child(8) { --o: .15;  --d: 830ms; }
+.practice-lines li:nth-child(9) { --o: .09;  --d: 890ms; }
+
+@keyframes settle {
+  from { opacity: 0; transform: translateY(0.4em); }
+  to   { opacity: var(--o); transform: none; }
+}
+
+.practice-note {
+  margin: 2.5rem 0 0;
+  max-width: 26rem;
+  color: var(--quiet);
+  font-size: 0.9375rem;
+}
+
+/* Day ------------------------------------------------------------------- */
+
+.day {
+  padding-block: clamp(3.5rem, 10vh, 6rem);
+}
+
+.day-grid {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.day-block h3 {
+  font-family: var(--display);
+  font-variation-settings: 'opsz' 28;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0 0 0.6rem;
+}
+.day-block p { margin: 0; color: var(--quiet); max-width: 26rem; }
+
+/* Trust ----------------------------------------------------------------- */
+
+.trust {
+  padding-block: clamp(3.5rem, 10vh, 6rem);
+}
+.trust p { margin: 0 0 1.1em; max-width: 32rem; }
+.trust p:last-child { margin-bottom: 0; }
+
+/* Waitlist -------------------------------------------------------------- */
+
+.waitlist {
+  padding-block: clamp(3.5rem, 10vh, 6rem);
+}
+
+.waitlist-title {
+  font-family: var(--display);
+  font-variation-settings: 'opsz' 48;
+  font-size: clamp(1.875rem, 1.2rem + 2.6vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0.75rem 0 1.25rem;
+  max-width: 16ch;
+}
+
+.waitlist p { margin: 0; max-width: 30rem; color: var(--quiet); }
+
+.waitlist-slot {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: var(--rule) dashed var(--line);
+  max-width: 30rem;
+}
+.waitlist-slot p { margin: 0; font-size: 0.9375rem; }
+.waitlist-slot a { color: var(--link); }
+
+@media (min-width: 46rem) {
+  .day-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.5rem; }
+}
+
+/* ==========================================================================
+   Document (privacy policy)
+   ========================================================================== */
+
+.doc-wrap { max-width: 50rem; }
+
+.doc-head {
+  padding-block: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  justify-content: space-between;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--quiet);
+}
+.doc-head a { color: inherit; }
+.doc-head p { margin: 0; }
+
+.doc-title {
+  font-size: clamp(2.5rem, 1.5rem + 4.4vw, 4rem);
+  margin-block: clamp(3rem, 9vh, 5rem) 1rem;
+}
+
+.doc-meta {
+  margin: 0 0 3rem;
+  font-size: 0.875rem;
+  color: var(--quiet);
+}
+.doc-meta strong { font-weight: 500; color: var(--body); }
+
+.summary {
+  background: var(--ground-up);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  margin-bottom: clamp(3rem, 8vh, 4.5rem);
+  border-left: 2px solid var(--amber);
+}
+.summary h2 {
+  font-family: var(--display);
+  font-variation-settings: 'opsz' 28;
+  font-size: 1.375rem;
+  font-weight: 400;
+  margin: 0 0 1rem;
+}
+.summary ul { margin: 0; padding-left: 1.1rem; }
+.summary li { margin-bottom: 0.6rem; }
+.summary li:last-child { margin-bottom: 0; }
+
+.sec {
+  padding-block: 0 clamp(2.5rem, 6vh, 3.5rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 2rem;
+}
+
+.sec-num {
+  font-family: var(--display);
+  font-variation-settings: 'opsz' 24;
+  font-size: 1rem;
+  color: var(--amber);
+  line-height: 1.9;
+  margin: 0;
+}
+
+.sec-body { min-width: 0; }
+
+.sec h2 {
+  font-family: var(--display);
+  font-variation-settings: 'opsz' 36;
+  font-size: clamp(1.5rem, 1.15rem + 1.1vw, 1.875rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+}
+
+.sec h3 {
+  font-family: var(--text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--quiet);
+  margin: 1.75rem 0 0.65rem;
+}
+
+.sec p { margin: 0 0 1.05em; }
+.sec p:last-child { margin-bottom: 0; }
+.sec ul { margin: 0 0 1.05em; padding-left: 1.1rem; }
+.sec li { margin-bottom: 0.5rem; }
+.sec li:last-child { margin-bottom: 0; }
+
+.callout {
+  border-left: 2px solid var(--line);
+  padding: 0.15rem 0 0.15rem 1.25rem;
+  margin: 0 0 1.05em;
+  color: var(--quiet);
+}
+
+.contact-line {
+  font-family: var(--display);
+  font-variation-settings: 'opsz' 28;
+  font-size: 1.375rem;
+  word-break: break-word;
+}
+
+@media (min-width: 52rem) {
+  .sec { grid-template-columns: 3rem minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .practice-lines li { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
