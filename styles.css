@@ -183,15 +183,24 @@ a:hover { text-decoration-thickness: 2px; }
 
 .studio-name {
   font-size: clamp(3.25rem, 1.6rem + 8.2vw, 6.5rem);
-  margin-bottom: 2.25rem;
+  margin-bottom: clamp(2rem, 5vh, 3rem);
 }
 
-.studio-mark {
-  display: block;
-  width: 2.75rem;
-  height: var(--rule);
-  background: var(--amber);
-  margin-bottom: 2.5rem;
+/* The one paragraph on this page is a statement, not body copy. Setting it in
+   the display face at a middle size gives the page a second voice, so it stops
+   falling off a cliff from 6.5rem straight down to 1rem. The measure is set in
+   ch so the three lines break on their own sentence boundaries. */
+
+.statement {
+  font-family: var(--display);
+  font-variation-settings: 'opsz' 40;
+  font-size: clamp(1.375rem, 1.05rem + 1.35vw, 1.875rem);
+  font-weight: 400;
+  line-height: 1.42;
+  letter-spacing: -0.008em;
+  max-width: 32ch;
+  margin: 0;
+  text-wrap: balance;
 }
 
 .roster { margin-top: clamp(4rem, 12vh, 7rem); }
